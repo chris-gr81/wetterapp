@@ -1,5 +1,5 @@
 const API_KEY = "162d7ac6c706473b97694142251204";
-const API_BASE = "http://api.weatherapi.com/v1";
+const API_BASE = "https://api.weatherapi.com/v1";
 
 export async function fetchApi() {
   const url = createRequestString("current.json", "Mannheim");
