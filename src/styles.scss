@@ -1,0 +1,41 @@
+@use "./variables.scss" as *;
+@use "sass:color";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: white;
+  font-family: "Inter", sans-serif;
+
+  @include tablet-and-bigger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: $backgroundColor;
+  }
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px color.scale($borderColor, $alpha: -70%);
+  background-color: cornflowerblue; /*temporary*/
+  padding: 1rem;
+  @include tablet-and-bigger {
+    min-width: 400px;
+  }
+}
+
+.current-weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
