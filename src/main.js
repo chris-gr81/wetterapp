@@ -1,5 +1,5 @@
 import "./styles.scss";
 import { fetchApi } from "./api";
-import { renderCurrentWeather } from "./ui";
+import { renderAppMain, renderLoadingScreen } from "./ui";
 
-renderCurrentWeather();
+renderAppMain();
