@@ -1,9 +1,3 @@
-$backgroundColor: #394759;
-$textColor: #fff;
-$borderColor: #000;
-
-$breakpoint: 700px;
-
 @mixin tablet-and-bigger {
   @media screen and (min-width: $breakpoint) {
     @content;

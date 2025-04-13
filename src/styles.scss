@@ -1,5 +1,8 @@
 @use "./variables.scss" as *;
 @use "sass:color";
+@import "variables";
+@import "mixins";
+@import "cityView";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
@@ -8,28 +11,32 @@
 }
 
 body {
-  color: white;
+  color: $textColor;
   font-family: "Inter", sans-serif;
-  background-color: $backgroundColor;
+  background-color: color.adjust($background, $lightness: 10%);
 
   @include tablet-and-bigger {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: $backgroundColor;
   }
 }
 
 .app {
+  background: linear-gradient(0deg, $elevationSecondary 0%, $background 50%);
   display: flex;
   justify-content: center;
-  height: 100vh;
-  border-radius: 5px;
-  box-shadow: 1px 1px 5px color.scale($borderColor, $alpha: -70%);
+  min-height: 100vh;
   padding: 1rem;
+
   @include tablet-and-bigger {
-    min-width: 400px;
+    width: 400px;
+    height: 900px;
+    min-height: unset;
+    overflow: auto;
+    border-radius: $border-radius;
+    box-shadow: $boxShadow;
   }
 }
 
@@ -44,30 +51,4 @@ body {
     font-size: 1.5rem;
   }
   @include loading-spinner("loading__", 80px);
-}
-
-.current-weather {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  text-shadow: 1px 1px 10px color.scale($borderColor, $alpha: -20%);
-
-  &__location {
-    font-size: 1.5rem;
-    font-weight: 300;
-  }
-
-  &__temperature {
-    font-size: 4.5rem;
-    font-weight: 200;
-  }
-
-  &__details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
 }

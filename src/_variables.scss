@@ -1,0 +1,14 @@
+@use "sass:color";
+
+$border-radius: 6px;
+$mainBackground: #394759;
+$background: #252e3a;
+$elevationPrimary: #101214;
+$elevationSecondary: #404547;
+$textColor: #fff;
+$borderColor: #000;
+
+$breakpoint: 700px;
+
+$textShadow: 1px 1px 10px color.scale($borderColor, $alpha: -20%);
+$boxShadow: 1px 1px 5px color.scale($borderColor, $alpha: -70%);
