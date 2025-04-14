@@ -1,5 +1,6 @@
 import "./styles.scss";
-import { fetchApi } from "./api";
-import { renderAppMain, renderLoadingScreen } from "./ui";
+import { renderAppCurrent } from "./ui_cityView";
 
-renderAppMain();
+export const appEl = document.querySelector(".app");
+
+renderAppCurrent("Mannheim");
