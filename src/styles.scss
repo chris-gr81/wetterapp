@@ -3,6 +3,7 @@
 @import "variables";
 @import "mixins";
 @import "city_view";
+@import "forecast";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
@@ -26,9 +27,11 @@ body {
 .app {
   background: linear-gradient(0deg, $elevationSecondary 0%, $background 50%);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   min-height: 100vh;
   padding: 1rem;
+  gap: 2rem;
 
   @include tablet-and-bigger {
     width: 400px;

@@ -1,15 +1,7 @@
-import { fetchApi } from "./api";
 import { styleTemperature } from "./util";
 import { appEl } from "./main";
-import { renderLoadingScreen } from "./ui_loading";
 
-export function renderAppCurrent(location) {
-  renderLoadingScreen(location);
-  renderCurrentWeather(location);
-}
-
-export async function renderCurrentWeather(selectedLocation) {
-  const weatherData = await fetchApi("forecast.json", selectedLocation);
+export async function renderCurrentWeather(weatherData) {
   const { location, current, forecast } = weatherData;
 
   renderWeatherScreen(); // overwrite loading after await was successfull
