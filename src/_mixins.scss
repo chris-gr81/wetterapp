@@ -1,3 +1,5 @@
+@use "./variables.scss" as *;
+
 @mixin tablet-and-bigger {
   @media screen and (min-width: $breakpoint) {
     @content;
@@ -45,4 +47,9 @@
       transform: rotate(360deg);
     }
   }
+}
+
+@mixin addBlur($amount) {
+  backdrop-filter: blur(#{$amount});
+  -webkit-backdrop-filter: blur(#{$amount});
 }
