@@ -27,7 +27,8 @@ body {
   background: linear-gradient(0deg, $elevationSecondary 0%, $background 50%);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+
   min-height: 100vh;
   padding: 1rem;
   gap: 2rem;
