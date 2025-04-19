@@ -17,3 +17,11 @@
     padding-bottom: 1rem;
   }
 }
+
+.hour-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  border: 1px solid grey;
+}
