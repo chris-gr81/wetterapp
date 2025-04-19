@@ -9,7 +9,10 @@ export function getCurrentTimeEpoch() {
   return current;
 }
 
-export function getCurrentDayEpoch() {
-  const now = new Date();
-  return `${now.getFullYear()}-${now.getMonth() + 1}`;
+export function formatTwoDigit(value) {
+  if (value < 10) {
+    return "0" + String(value);
+  } else {
+    return String(value);
+  }
 }

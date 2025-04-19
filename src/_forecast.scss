@@ -16,6 +16,11 @@
     border-bottom: 1px solid color.adjust($textColor, $alpha: -0.8);
     padding-bottom: 1rem;
   }
+
+  &__lower {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .hour-card {
@@ -24,4 +29,8 @@
   justify-content: center;
   gap: 1rem;
   border: 1px solid grey;
+
+  &__symbol {
+    width: 3rem;
+  }
 }
