@@ -20,6 +20,8 @@
   &__lower {
     display: flex;
     flex-direction: row;
+    overflow-x: scroll;
+    gap: 1rem;
   }
 }
 
@@ -27,10 +29,19 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  min-width: 60px;
   gap: 1rem;
-  border: 1px solid grey;
+
+  &__hour {
+    text-align: center;
+  }
 
   &__symbol {
-    width: 3rem;
+    width: 50px;
+  }
+
+  &__temperature {
+    text-align: center;
   }
 }

@@ -55,6 +55,7 @@ function createForecastMatrix(location, forecastday) {
       temp: styleTemperature(forecastday[1].hour[i].temp_c, 0),
     });
   }
+  matrix[0].hour = "Jetzt";
 
   return matrix;
 }
