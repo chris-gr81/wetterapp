@@ -1,4 +1,5 @@
 @use "./variables.scss" as *;
+@use "sass:color";
 
 @mixin tablet-and-bigger {
   @media screen and (min-width: $breakpoint) {
@@ -52,4 +53,19 @@
 @mixin addBlur($amount) {
   backdrop-filter: blur(#{$amount});
   -webkit-backdrop-filter: blur(#{$amount});
+}
+
+@mixin card() {
+  display: flex;
+  flex-direction: column;
+  padding: 1.7rem 1rem;
+  gap: 1rem;
+  border-radius: 10px;
+  box-shadow: $boxShadow;
+  @include addBlur(2rem);
+}
+
+@mixin cardHeader() {
+  border-bottom: 1px solid color.adjust($textColor, $alpha: -0.8);
+  padding-bottom: 1rem;
 }

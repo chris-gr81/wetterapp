@@ -1,4 +1,4 @@
-import { styleTemperature } from "./util";
+import { styleUnitString } from "./util";
 import { appEl } from "./main";
 
 export async function renderCurrentWeather(weatherData) {
@@ -7,9 +7,9 @@ export async function renderCurrentWeather(weatherData) {
   renderWeatherScreen(); // overwrite loading after await was successfull
   const currentWeatherEl = document.querySelector(".current-weather");
 
-  const currentTemperature = styleTemperature(current.temp_c, 0);
-  const high = styleTemperature(forecast.forecastday[0].day.maxtemp_c, 0);
-  const low = styleTemperature(forecast.forecastday[0].day.mintemp_c, 0);
+  const currentTemperature = styleUnitString(current.temp_c, 0, "°");
+  const high = styleUnitString(forecast.forecastday[0].day.maxtemp_c, 0, "°");
+  const low = styleUnitString(forecast.forecastday[0].day.mintemp_c, 0, "°");
   const displayContent = `
         <div class="current-weather__location">${location.name}</div>
         <div class="current-weather__temperature">${currentTemperature}</div>

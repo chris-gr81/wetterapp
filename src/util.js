@@ -1,7 +1,7 @@
-export function styleTemperature(value, decimalPlace) {
+export function styleUnitString(value, decimalPlace, unit) {
   const factor = Math.pow(10, decimalPlace);
   value = Math.floor(value * factor) / factor;
-  return (value += "°");
+  return (value += unit);
 }
 
 export function getCurrentTimeEpoch() {

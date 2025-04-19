@@ -8,7 +8,7 @@ export const appEl = document.querySelector(".app");
 
 async function renderAppCurrent(location) {
   renderLoadingScreen(location);
-  const weatherData = await fetchApi("forecast.json", location, 4);
+  const weatherData = await fetchApi("forecast.json", location, 3);
   renderCurrentWeather(weatherData);
   renderForecast(weatherData);
 }
