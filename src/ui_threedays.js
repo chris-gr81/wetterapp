@@ -1,5 +1,5 @@
 import { appEl } from "./main";
-import { getNextTwoWeeknames, styleUnitString } from "./util";
+import { getNextWeeknames, styleUnitString } from "./util";
 
 export function renderThreeDays(weatherData) {
   const threeDaysEl = document.createElement("div");
@@ -17,14 +17,12 @@ function getThreeDaysHTML(weatherData) {
 
 function createThreeDayList(weatherData) {
   const { forecast } = weatherData;
-  const today = "Heute";
-  const [tommorow, dayTwo] = getNextTwoWeeknames();
 
-  return (
-    createDayRow(forecast.forecastday[0], today) +
-    createDayRow(forecast.forecastday[1], tommorow) +
-    createDayRow(forecast.forecastday[2], dayTwo)
-  );
+  return getNextWeeknames()
+    .map((value, index) => {
+      return createDayRow(forecast.forecastday[index], value);
+    })
+    .join("");
 }
 
 function createDayRow(forecastday, dayName) {
