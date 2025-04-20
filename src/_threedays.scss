@@ -1,0 +1,42 @@
+@use "./mixins.scss" as *;
+@use "./variables.scss" as *;
+
+.three-days {
+  @include card();
+  gap: 0rem;
+
+  &__header {
+    @include cardHeader();
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0rem;
+    margin: 0rem;
+  }
+}
+
+.list-day {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding-top: 1rem;
+  @include cardHeader();
+
+  &:last-child {
+    border: none;
+    padding-bottom: 0;
+  }
+
+  &__day {
+    width: 2rem;
+  }
+
+  &__symbol {
+    width: 2.5rem;
+  }
+}

@@ -16,3 +16,9 @@ export function formatTwoDigit(value) {
     return String(value);
   }
 }
+
+export function getNextTwoWeeknames() {
+  const weekdays = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So", "Mo"];
+  const today = new Date().getDay();
+  return [weekdays[today + 1], weekdays[today + 2]];
+}

@@ -1,8 +1,9 @@
 @use "./variables.scss" as *;
 @use "./mixins.scss" as *;
 @use "sass:color";
-@use "./city_view.scss";
-@use "./forecast.scss";
+@forward "city_view";
+@forward "forecast";
+@forward "threedays";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
