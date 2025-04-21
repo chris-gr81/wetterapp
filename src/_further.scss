@@ -16,6 +16,9 @@
   flex: 0 0 calc(50% - 0.5rem);
   box-sizing: border-box;
 
+  &__name {
+    font-size: 0.9rem;
+  }
   &__value {
     font-size: 1.5rem;
   }
