@@ -4,6 +4,7 @@ import { fetchApi } from "./api";
 import { renderLoadingScreen } from "./ui_loading";
 import { renderForecast } from "./ui_forecast";
 import { renderThreeDays } from "./ui_threedays";
+import { renderFurther } from "./ui_further";
 
 export const appEl = document.querySelector(".app");
 
@@ -13,6 +14,7 @@ async function renderAppCurrent(location) {
   renderCurrentWeather(weatherData);
   renderForecast(weatherData);
   renderThreeDays(weatherData);
+  renderFurther(weatherData);
 }
 
 renderAppCurrent("Mannheim");

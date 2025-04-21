@@ -22,3 +22,14 @@ export function getNextWeeknames() {
   const today = new Date().getDay();
   return ["Heute", weekdays[today + 1], weekdays[today + 2]];
 }
+
+export function formatTimeTo24(timeString) {
+  const [time, factor] = timeString.split(" ");
+  let [hours, minutes] = time.split(":");
+  hours = parseInt(hours, 10);
+
+  if (factor === "PM" && hours !== 12) hours += 12;
+  if (factor === "AM" && hours === 12) hours = 0;
+
+  return `${String(hours).padStart(2, "0")}:${minutes} Uhr`;
+}
