@@ -1,11 +1,10 @@
-import { styleUnitString, getPictureUrl } from "./util";
+import { styleUnitString, setBackground } from "./util";
 import { appEl } from "./main";
 
 export async function renderCurrentWeather(weatherData) {
   const { location, current, forecast } = weatherData;
-  const backgroundUrl = getPictureUrl(weatherData);
-  appEl.style.background = `url(${backgroundUrl}) center/cover no-repeat`;
-  console.log(backgroundUrl);
+  setBackground(weatherData, appEl);
+
   renderWeatherScreen(); // overwrite loading after await was successfull
   const currentWeatherEl = document.querySelector(".current-weather");
 

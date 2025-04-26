@@ -10,5 +10,5 @@ $borderColor: #000;
 
 $breakpoint: 700px;
 
-$textShadow: 1px 1px 10px color.scale($borderColor, $alpha: -20%);
+$textShadow: 1px 1px 5px $borderColor;
 $boxShadow: 1px 1px 5px color.scale($borderColor, $alpha: -70%);

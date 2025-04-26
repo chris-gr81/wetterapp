@@ -26,6 +26,7 @@ body {
 }
 
 .app {
+  --bg-url: none;
   background: linear-gradient(0deg, $elevationSecondary 0%, $background 50%);
   display: flex;
   flex-direction: column;
@@ -48,6 +49,13 @@ body {
     overflow: auto;
     border-radius: $border-radius;
     box-shadow: $boxShadow;
+  }
+
+  &--withBG {
+    background-image: linear-gradient(0deg, #0003 30%, #0003 100%),
+      var(--bg-url);
+    background-size: cover;
+    background-position: center;
   }
 }
 

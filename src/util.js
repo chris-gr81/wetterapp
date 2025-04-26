@@ -36,8 +36,11 @@ export function formatTimeTo24(timeString) {
   return `${String(hours).padStart(2, "0")}:${minutes} Uhr`;
 }
 
-export function getPictureUrl(weatherData) {
+export function setBackground(weatherData, currentNode) {
   const condition = weatherData.current.condition.code;
   const isDay = Boolean(weatherData.current.is_day);
-  return getConditionImagePath(condition, !isDay);
+  const bgUrl = getConditionImagePath(condition, !isDay);
+  const activeClass = `${currentNode.classList[0]}--withBG`;
+  currentNode.classList.add(activeClass);
+  currentNode.style.setProperty("--bg-url", `url(${bgUrl})`);
 }
