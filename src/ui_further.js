@@ -12,11 +12,10 @@ function getFurtherHTML(weatherData) {
   const matrix = getFurtherMatrix(weatherData.forecast.forecastday[0]);
   return matrix
     .map((e) => {
-      const [[key, value]] = Object.entries(e);
       return `
         <div class="single-card">
-            <div class="single-card__name">${key}</div>
-            <div class="single-card__value">${value}</div>
+            <div class="single-card__name">${e.title}</div>
+            <div class="single-card__value">${e.value}</div>
         </div>
     `;
     })
@@ -27,14 +26,15 @@ function getFurtherMatrix(selectedData) {
   const matrix = [];
   const { day, astro } = selectedData;
   matrix.push(
-    { "UV-Index": day.uv },
+    { title: "UV-Index", value: day.uv },
     {
-      "Regen zu": styleUnitString(day.daily_chance_of_rain, 0, "%"),
+      title: "Regen zu",
+      value: styleUnitString(day.daily_chance_of_rain, 0, "%"),
     },
-    { Sonnenaufgang: formatTimeTo24(astro.sunrise) },
-    { Sonnenuntergang: formatTimeTo24(astro.sunset) },
-    { Mondaufgang: formatTimeTo24(astro.moonrise) },
-    { Monduntergang: formatTimeTo24(astro.moonset) }
+    { title: "Sonnenaufgang", value: formatTimeTo24(astro.sunrise) },
+    { title: "Sonnenuntergang", value: formatTimeTo24(astro.sunset) },
+    { title: "Mondaufgang", value: formatTimeTo24(astro.moonrise) },
+    { title: "Monduntergang", value: formatTimeTo24(astro.moonset) }
   );
   return matrix;
 }

@@ -1,3 +1,5 @@
+import { getConditionImagePath } from "./conditions";
+
 export function styleUnitString(value, decimalPlace, unit) {
   const factor = Math.pow(10, decimalPlace);
   value = Math.floor(value * factor) / factor;
@@ -32,4 +34,10 @@ export function formatTimeTo24(timeString) {
   if (factor === "AM" && hours === 12) hours = 0;
 
   return `${String(hours).padStart(2, "0")}:${minutes} Uhr`;
+}
+
+export function getPictureUrl(weatherData) {
+  const condition = weatherData.current.condition.code;
+  const isDay = Boolean(weatherData.current.is_day);
+  return getConditionImagePath(condition, !isDay);
 }
