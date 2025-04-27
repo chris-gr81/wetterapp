@@ -7,7 +7,36 @@
     <title>wetterApp</title>
   </head>
   <body>
-    <div class="app"></div>
+    <div class="app">
+      <div class="main-menu">
+        <div class="main-menu__header">
+          <h1>Wetter</h1>
+          <span>Bearbeiten</span>
+        </div>
+        <div class="main-menu__search">
+          <input
+            type="text"
+            class="main-menu__search-input"
+            placeholder="Nach Stadt suchen..."
+          />
+        </div>
+        <div class="main-menu__favourites">
+          <div class="fav-card">
+            <div class="fav-card__locals">
+              <div class="fav-card__geo-wrapper">
+                <div class="fav-card__city">Mannheim</div>
+                <div class="fav_card__nation">Germany</div>
+              </div>
+              <div class="fav-card__condition">Sonnig</div>
+            </div>
+            <div class="fav-card__temperature">
+              <div class="fav-card__current">20°</div>
+              <div class="fav-card__maximums">H:5° T:2°</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

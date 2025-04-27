@@ -55,14 +55,17 @@
   -webkit-backdrop-filter: blur(#{$amount});
 }
 
-@mixin card() {
+@mixin card($blurry: true) {
   display: flex;
   flex-direction: column;
   padding: 1.7rem 1rem;
   gap: 1rem;
   border-radius: 10px;
   box-shadow: $boxShadow;
-  @include addBlur(2rem);
+
+  @if $blurry {
+    @include addBlur(1rem);
+  }
 }
 
 @mixin cardHeader() {

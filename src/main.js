@@ -8,6 +8,8 @@ import { renderFurther } from "./ui_further";
 
 export const appEl = document.querySelector(".app");
 
+async function renderMainMenu() {}
+
 async function renderAppCurrent(location) {
   renderLoadingScreen(location);
   const weatherData = await fetchApi("forecast.json", location, 3);
@@ -17,4 +19,5 @@ async function renderAppCurrent(location) {
   renderFurther(weatherData);
 }
 
-renderAppCurrent("Mannheim");
+/* renderAppCurrent("Mannheim");
+ */
