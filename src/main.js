@@ -19,7 +19,7 @@ async function renderMainMenu(favourites) {
 
 export async function renderAppCurrent(locationCode, locationName) {
   renderLoadingScreen(locationName);
-  const weatherData = await fetchApi("forecast.json", "id:" + locationCode, 3);
+  const weatherData = await fetchApi("forecast.json", locationCode, 3);
   renderCurrentWeather(weatherData);
   renderForecast(weatherData);
   renderThreeDays(weatherData);

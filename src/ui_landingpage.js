@@ -36,6 +36,7 @@ function renderSearch() {
 function createFavs(matrix) {
   const favouritesEl = document.createElement("div");
   favouritesEl.classList.add("main-menu__favourites");
+
   const cards = matrix.map((e) => {
     const cardEl = document.createElement("div");
     cardEl.classList.add("fav-card");

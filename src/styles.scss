@@ -17,6 +17,7 @@ body {
   color: $textColor;
   font-family: "Inter", sans-serif;
   background-color: color.adjust($background, $lightness: 10%);
+  height: 100%;
   overflow: hidden;
 
   @include tablet-and-bigger {
@@ -33,7 +34,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow-y: scroll;
+  height: 100vh;
+  overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
