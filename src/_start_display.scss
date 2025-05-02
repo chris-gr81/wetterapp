@@ -39,11 +39,13 @@
 }
 
 .fav-card {
+  --bg-url: none;
   @include card($blurry: false);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   text-shadow: $textShadow;
+  cursor: pointer;
 
   &__locals {
     display: flex;
@@ -65,5 +67,9 @@
     font-size: 2.5rem;
     text-align: right;
     font-weight: 250;
+  }
+
+  &--withBG {
+    @include withBG;
   }
 }

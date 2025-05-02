@@ -5,19 +5,25 @@ import { renderLoadingScreen } from "./ui_loading";
 import { renderForecast } from "./ui_forecast";
 import { renderThreeDays } from "./ui_threedays";
 import { renderFurther } from "./ui_further";
+import { favourites } from "./localStorage";
+import { buildFavMatrix } from "./util";
+import { renderLandingPage } from "./ui_landingpage";
 
 export const appEl = document.querySelector(".app");
 
-async function renderMainMenu() {}
+async function renderMainMenu(favourites) {
+  renderLoadingScreen();
+  const matrix = await buildFavMatrix(favourites);
+  renderLandingPage(matrix);
+}
 
-async function renderAppCurrent(location) {
-  renderLoadingScreen(location);
-  const weatherData = await fetchApi("forecast.json", location, 3);
+export async function renderAppCurrent(locationCode, locationName) {
+  renderLoadingScreen(locationName);
+  const weatherData = await fetchApi("forecast.json", "id:" + locationCode, 3);
   renderCurrentWeather(weatherData);
   renderForecast(weatherData);
   renderThreeDays(weatherData);
   renderFurther(weatherData);
 }
 
-/* renderAppCurrent("Mannheim");
- */
+renderMainMenu(favourites);

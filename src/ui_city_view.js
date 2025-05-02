@@ -3,7 +3,7 @@ import { appEl } from "./main";
 
 export async function renderCurrentWeather(weatherData) {
   const { location, current, forecast } = weatherData;
-  setBackground(weatherData, appEl);
+  setBackground(current.condition.code, current.is_day, appEl);
 
   renderWeatherScreen(); // overwrite loading after await was successfull
   const currentWeatherEl = document.querySelector(".current-weather");

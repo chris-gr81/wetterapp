@@ -72,3 +72,14 @@
   border-bottom: 1px solid color.adjust($textColor, $alpha: -0.8);
   padding-bottom: 1rem;
 }
+
+@mixin withBG() {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ),
+    var(--bg-url);
+  background-size: cover;
+  background-position: center;
+}
