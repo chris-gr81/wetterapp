@@ -35,7 +35,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
+  min-height: 100%;
   overflow: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
