@@ -18,7 +18,7 @@ body {
   color: $textColor;
   font-family: "Inter", sans-serif;
   background-color: color.adjust($background, $lightness: 10%);
-  height: 100%;
+
   overflow: hidden;
 
   @include tablet-and-bigger {
