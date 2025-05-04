@@ -5,8 +5,8 @@ export async function renderCurrentWeather(weatherData) {
   const { location, current, forecast } = weatherData;
   setBackground(current.condition.code, current.is_day, appEl);
 
-  renderWeatherScreen(); // overwrite loading after await was successfull
-  const currentWeatherEl = document.querySelector(".current-weather");
+  const currentWeatherEl = document.createElement("div");
+  currentWeatherEl.classList.add("current-weather");
 
   const currentTemperature = styleUnitString(current.temp_c, 0, "°");
   const high = styleUnitString(forecast.forecastday[0].day.maxtemp_c, 0, "°");
@@ -20,9 +20,5 @@ export async function renderCurrentWeather(weatherData) {
         </div>
   `;
   currentWeatherEl.innerHTML = displayContent;
-}
-
-export function renderWeatherScreen() {
-  appEl.innerHTML = `
-        <div class="current-weather"></div>`;
+  appEl.append(currentWeatherEl);
 }

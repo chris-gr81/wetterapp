@@ -1,0 +1,14 @@
+@use "./mixins.scss" as *;
+@use "./variables.scss" as *;
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__back-btn,
+  &__fav-btn {
+    height: 2.5rem;
+    filter: drop-shadow($textShadow);
+  }
+}
