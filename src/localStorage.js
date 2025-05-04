@@ -19,3 +19,11 @@ export function pushFavList(locationCode, locationName) {
   favList.push({ city: locationName, id: Number(locationCode) });
   setFavList(favList);
 }
+
+export function deleteElement(locationCode) {
+  const newList = getFavList().filter((e) => {
+    return e.id !== Number(locationCode);
+  });
+  setFavList(newList);
+  console.log(getFavList());
+}

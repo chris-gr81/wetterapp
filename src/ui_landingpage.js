@@ -1,76 +1,63 @@
+import { deleteElement } from "./localStorage";
 import { appEl, renderAppCurrent } from "./main";
-import { setBackground } from "./util";
+import { createEl, setBackground } from "./util";
 
-export function renderLandingPage(matrix) {
-  const mainMenuEl = document.createElement("div");
-  mainMenuEl.classList.add("main-menu");
-
-  mainMenuEl.append(createHeader());
+export function renderLandingPage(matrix, isSettings) {
+  const mainMenuEl = createEl("div", "main-menu");
+  const header = createHeader(isSettings);
+  mainMenuEl.append(header);
   mainMenuEl.append(createSearch());
   mainMenuEl.append(createFavs(matrix));
 
   appEl.innerHTML = "";
   appEl.append(mainMenuEl);
+
+  if (isSettings) {
+    settingsOn(header.querySelector(".main-menu__settings"));
+  }
 }
 
-function createHeader() {
-  const headerEl = document.createElement("div");
-  headerEl.classList.add("main-menu__header");
-
-  const headingEl = document.createElement("h1");
-  headingEl.innerText = "Wetter";
+function createHeader(isSettings) {
+  const headerEl = createEl("div", "main-menu__header");
+  const headingEl = createEl("h1", "", "Wetter");
   headerEl.append(headingEl);
 
-  const settingsEl = document.createElement("span");
-  settingsEl.classList.add("main-menu__settings");
-  settingsEl.innerText = "Bearbeiten";
+  const settingsEl = createEl("span", "main-menu__settings", "Bearbeiten");
 
+  settingsEl.dataset.state = isSettings ? "open" : "closed";
   settingsEl.addEventListener("click", () => {
-    console.log("Trump ist Hurensohn");
+    toggleSettings(settingsEl.dataset.state === "closed", settingsEl);
   });
 
   headerEl.append(settingsEl);
-
   return headerEl;
 }
 
 function createSearch() {
-  const searchEl = document.createElement("div");
-  searchEl.classList.add("main-menu__search");
-  searchEl.innerHTML = `
+  const searchContent = `
         <input
             type="text"
             class="main-menu__search-input"
             placeholder="Nach Stadt suchen..."
         />
     `;
-  return searchEl;
+  return createEl("div", "main-menu__search", searchContent);
 }
 
 function createFavs(matrix) {
-  const favouritesEl = document.createElement("div");
-  favouritesEl.classList.add("main-menu__favourites");
+  const favouritesEl = createEl("div", "main-menu__favourites");
 
-  const cards = matrix.map((e) => {
-    const rowEl = document.createElement("div");
-    rowEl.classList.add("main-menu__fav-row");
-    const delEl = createDeleteBtn(e);
-    const cardEl = createCard(e);
-    rowEl.append(delEl);
-    rowEl.append(cardEl);
+  matrix.forEach((e) => {
+    const rowEl = createEl("div", "main-menu__fav-row");
+    rowEl.append(createDeleteBtn(e, matrix), createCard(e));
     favouritesEl.append(rowEl);
   });
 
   return favouritesEl;
 }
 
-function createDeleteBtn(e) {
-  const deleteEl = document.createElement("div");
-  deleteEl.classList.add("fav-delete");
-  deleteEl.addEventListener("click", () => {
-    console.log("delete delete");
-  });
-  deleteEl.innerHTML = `
+function createDeleteBtn(e, matrix) {
+  const deleteContent = `
     <svg xmlns="http://www.w3.org/2000/svg" 
         fill="none" 
         viewBox="0 0 24 24" 
@@ -81,24 +68,28 @@ function createDeleteBtn(e) {
         stroke-linejoin="round" 
         d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
     </svg>
-
     `;
+  const deleteEl = createEl("div", "fav-delete", deleteContent);
+  deleteEl.dataset.locationName = e.city;
+  deleteEl.dataset.locationCode = e.id;
+
+  deleteEl.addEventListener("click", () => {
+    deleteElement(deleteEl.dataset.locationCode);
+    const newMatrix = matrix.filter((e) => {
+      return e.id !== Number(deleteEl.dataset.locationCode);
+    });
+    renderLandingPage(newMatrix, true);
+  });
+
   return deleteEl;
 }
 
 function createCard(e) {
-  const cardEl = document.createElement("div");
-  cardEl.classList.add("fav-card");
-  cardEl.setAttribute("data-code", `${e.id}`);
-  cardEl.addEventListener("click", () => {
-    renderAppCurrent(e.id, e.city);
-  });
-  setBackground(e.code, e.isDay, cardEl);
-  cardEl.innerHTML = `
+  const cardContent = `
             <div class="fav-card__locals">
               <div class="fav-card__geo-wrapper">
                 <div class="fav-card__city">${e.city}</div>
-                <div class="fav_card__nation">${e.country}</div>
+                <div class="fav-card__nation">${e.country}</div>
               </div>
               <div class="fav-card__condition">${e.condition}</div>
             </div>
@@ -107,5 +98,34 @@ function createCard(e) {
               <div class="fav-card__maximums">${e.highLow}</div>
             </div>   
     `;
+  const cardEl = createEl("div", "fav-card", cardContent);
+  cardEl.dataset.code = e.id;
+  cardEl.addEventListener("click", () => {
+    renderAppCurrent(e.id, e.city);
+  });
+  setBackground(e.code, e.isDay, cardEl);
+
   return cardEl;
+}
+
+function toggleSettings(isClosed, settingsEl) {
+  if (isClosed) {
+    settingsOn(settingsEl);
+  } else {
+    settingsOff(settingsEl);
+  }
+}
+
+function settingsOn(settingsEl) {
+  const favEls = document.querySelectorAll(".fav-delete");
+  settingsEl.innerText = "Fertig";
+  settingsEl.dataset.state = "open";
+  favEls.forEach((fav) => fav.classList.add("fav-delete--active"));
+}
+
+function settingsOff(settingsEl) {
+  const favEls = document.querySelectorAll(".fav-delete");
+  settingsEl.innerText = "Bearbeiten";
+  settingsEl.dataset.state = "closed";
+  favEls.forEach((fav) => fav.classList.remove("fav-delete--active"));
 }

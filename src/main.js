@@ -15,7 +15,7 @@ export const appEl = document.querySelector(".app");
 export async function renderMainMenu(favourites) {
   renderLoadingScreen();
   const matrix = await buildFavMatrix(favourites);
-  renderLandingPage(matrix);
+  renderLandingPage(matrix, false);
 }
 
 export async function renderAppCurrent(locationCode, locationName) {

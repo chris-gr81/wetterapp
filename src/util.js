@@ -70,3 +70,11 @@ export async function buildFavMatrix(favourites) {
   );
   return matrix;
 }
+
+export function createEl(tag, className, content = "") {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (content) element.innerHTML = content;
+
+  return element;
+}
