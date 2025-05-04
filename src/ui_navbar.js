@@ -14,13 +14,7 @@ export function renderNavbar(locationCode, locationName) {
 }
 
 function renderBackButton(navbarEl) {
-  const backEl = createEl("div", "navbar__back");
-
-  backEl.addEventListener("click", () => {
-    renderMainMenu(getFavList());
-  });
-
-  backEl.innerHTML = `
+  const backContent = `
         <svg xmlns="http://www.w3.org/2000/svg" 
             fill="none" 
             viewBox="0 0 24 24" 
@@ -31,6 +25,11 @@ function renderBackButton(navbarEl) {
             stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
     `;
+  const backEl = createEl("div", "navbar__back", backContent);
+
+  backEl.addEventListener("click", () => {
+    renderMainMenu(getFavList());
+  });
   navbarEl.append(backEl);
 }
 
