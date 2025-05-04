@@ -1,10 +1,12 @@
 import { appEl } from "./main";
-import { getNextWeeknames, styleUnitString } from "./util";
+import { createEl, getNextWeeknames, styleUnitString } from "./util";
 
 export function renderThreeDays(weatherData) {
-  const threeDaysEl = document.createElement("div");
-  threeDaysEl.classList.add("three-days");
-  threeDaysEl.innerHTML = getThreeDaysHTML(weatherData);
+  const threeDaysEl = createEl(
+    "div",
+    "three-days",
+    getThreeDaysHTML(weatherData)
+  );
   appEl.append(threeDaysEl);
 }
 

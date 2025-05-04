@@ -1,12 +1,9 @@
-import { styleUnitString, setBackground } from "./util";
+import { styleUnitString, setBackground, createEl } from "./util";
 import { appEl } from "./main";
 
 export async function renderCurrentWeather(weatherData) {
   const { location, current, forecast } = weatherData;
   setBackground(current.condition.code, current.is_day, appEl);
-
-  const currentWeatherEl = document.createElement("div");
-  currentWeatherEl.classList.add("current-weather");
 
   const currentTemperature = styleUnitString(current.temp_c, 0, "°");
   const high = styleUnitString(forecast.forecastday[0].day.maxtemp_c, 0, "°");
@@ -19,6 +16,6 @@ export async function renderCurrentWeather(weatherData) {
             <span>H:${high} T:${low}</span>
         </div>
   `;
-  currentWeatherEl.innerHTML = displayContent;
+  const currentWeatherEl = createEl("div", "current-weather", displayContent);
   appEl.append(currentWeatherEl);
 }

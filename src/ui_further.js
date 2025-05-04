@@ -1,10 +1,8 @@
 import { appEl } from "./main";
-import { styleUnitString, formatTimeTo24 } from "./util";
+import { styleUnitString, formatTimeTo24, createEl } from "./util";
 
 export function renderFurther(weatherData) {
-  const furtherEl = document.createElement("div");
-  furtherEl.classList.add("further");
-  furtherEl.innerHTML = getFurtherHTML(weatherData);
+  const furtherEl = createEl("div", "further", getFurtherHTML(weatherData));
   appEl.append(furtherEl);
 }
 

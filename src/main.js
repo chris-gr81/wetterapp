@@ -36,7 +36,5 @@ const favourites = [
 ];
 setFavList(favourites);
 
-console.log(getFavList().some((e) => e.city === "Mannhei"));
-
 // End of Playground
 renderMainMenu(getFavList());

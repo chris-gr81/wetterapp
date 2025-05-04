@@ -23,7 +23,6 @@ function createHeader(isSettings) {
   headerEl.append(headingEl);
 
   const settingsEl = createEl("span", "main-menu__settings", "Bearbeiten");
-
   settingsEl.dataset.state = isSettings ? "open" : "closed";
   settingsEl.addEventListener("click", () => {
     toggleSettings(settingsEl.dataset.state === "closed", settingsEl);

@@ -1,14 +1,12 @@
 import { appEl } from "./main";
-import { formatTwoDigit, styleUnitString } from "./util";
+import { formatTwoDigit, styleUnitString, createEl } from "./util";
 
 export function renderForecast(weatherData) {
-  const forecastEl = document.createElement("div");
   const { maxwind_kph, condition } = weatherData.forecast.forecastday[0].day;
-  forecastEl.classList.add("forecast");
-  forecastEl.innerHTML = getForecastHTML(
-    condition.text,
-    maxwind_kph,
-    weatherData
+  const forecastEl = createEl(
+    "div",
+    "forecast",
+    getForecastHTML(condition.text, maxwind_kph, weatherData)
   );
   appEl.append(forecastEl);
 }
