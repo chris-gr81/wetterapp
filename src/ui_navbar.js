@@ -19,7 +19,7 @@ function renderBackButton(navbarEl) {
             fill="none" 
             viewBox="0 0 24 24" 
             stroke-width="1.5" 
-            stroke="currentColor" 
+            stroke="currentColor" S
             class="navbar__back-btn">
             <path stroke-linecap="round" 
             stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
@@ -38,7 +38,7 @@ function renderFavButton(navbarEl, locationCode, locationName) {
         <svg xmlns="http://www.w3.org/2000/svg" 
             fill="none" 
             viewBox="0 0 24 24" 
-            troke-width="1.5" 
+            stroke-width="1.5" 
             stroke="currentColor" 
             class="navbar__fav-btn">
             <path stroke-linecap="round" 

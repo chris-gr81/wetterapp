@@ -43,6 +43,11 @@
     flex-direction: row;
     gap: 1rem;
   }
+
+  &__empty-msg {
+    text-shadow: $textShadow;
+    font-weight: 300;
+  }
 }
 
 .fav-delete {

@@ -7,7 +7,15 @@ export function renderLandingPage(matrix, isSettings) {
   const header = createHeader(isSettings);
   mainMenuEl.append(header);
   mainMenuEl.append(createSearch());
-  mainMenuEl.append(createFavs(matrix));
+  mainMenuEl.append(
+    matrix.length > 0
+      ? createFavs(matrix)
+      : createEl(
+          "span",
+          "main-menu__empty-msg",
+          "Noch keine Favoriten gespeichert."
+        )
+  );
 
   appEl.innerHTML = "";
   appEl.append(mainMenuEl);
