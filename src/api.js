@@ -8,6 +8,14 @@ export async function fetchApi(api, location, days) {
   return result;
 }
 
-function createRequestString(request, location, days) {
-  return `${API_BASE}/${request}?key=${API_KEY}&q=${location}&lang=de&days=${days}`;
+export async function fetchSearch(searchValue, signal) {
+  const url = createRequestString("search.json", searchValue);
+  const response = await fetch(url, { signal });
+  const result = await response.json();
+  return result;
+}
+
+function createRequestString(request, location, days = false) {
+  const dayString = days ? `&lang=de&days=${days}` : ``;
+  return `${API_BASE}/${request}?key=${API_KEY}&q=${location}${dayString}`;
 }

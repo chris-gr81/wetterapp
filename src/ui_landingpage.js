@@ -1,6 +1,9 @@
+import { fetchSearch } from "./api";
 import { deleteElement } from "./localStorage";
 import { appEl, renderAppCurrent } from "./main";
-import { createEl, setBackground } from "./util";
+import { createEl, debounce, setBackground, validateInput } from "./util";
+
+let searchString = "";
 
 export function renderLandingPage(matrix, isSettings) {
   const mainMenuEl = createEl("div", "main-menu");
@@ -41,14 +44,24 @@ function createHeader(isSettings) {
 }
 
 function createSearch() {
-  const searchContent = `
-        <input
-            type="text"
-            class="main-menu__search-input"
-            placeholder="Nach Stadt suchen..."
-        />
-    `;
-  return createEl("div", "main-menu__search", searchContent);
+  const searchInputEl = createEl("input", "main-menu__search-input", "", {
+    type: "text",
+    placeholder: "Nach Stadt suchen...",
+  });
+  const searchEl = createEl("div", "main-menu__search");
+  searchEl.append(searchInputEl);
+
+  searchInputEl.addEventListener(
+    "input",
+    debounce(async (e, signal) => {
+      const searchString = validateInput(e.target.value);
+      if (!searchString) return;
+      const suggestions = await fetchSearch(searchString, signal);
+      console.log(suggestions);
+    }, 500)
+  );
+
+  return searchEl;
 }
 
 function createFavs(matrix) {
@@ -105,8 +118,9 @@ function createCard(e) {
               <div class="fav-card__maximums">${e.highLow}</div>
             </div>   
     `;
-  const cardEl = createEl("div", "fav-card", cardContent);
-  cardEl.dataset.code = e.id;
+  const cardEl = createEl("div", "fav-card", cardContent, {
+    "data-code": e.id,
+  });
   cardEl.addEventListener("click", () => {
     renderAppCurrent(e.id, e.city);
   });

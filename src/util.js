@@ -71,10 +71,45 @@ export async function buildFavMatrix(favourites) {
   return matrix;
 }
 
-export function createEl(tag, className = "", content = "") {
+export function createEl(tag, className = "", content = "", attributes = {}) {
   const element = document.createElement(tag);
   if (className) element.className = className;
   if (content) element.innerHTML = content;
-
+  for (const [key, value] of Object.entries(attributes)) {
+    element.setAttribute(key, value);
+  }
   return element;
+}
+
+export function debounce(fn, delay) {
+  let timeoutId;
+  let controller = null;
+
+  return function (...args) {
+    if (timeoutId) clearTimeout(timeoutId);
+    if (controller) controller.abort();
+
+    controller = new AbortController();
+    const signal = controller.signal;
+
+    timeoutId = setTimeout(() => {
+      fn(...args, signal);
+    }, delay);
+  };
+}
+
+export function validateInput(input) {
+  const noWhiteSpace = input.trim();
+
+  if (!noWhiteSpace) return null;
+
+  if (/[<>"';(){}[\]=`\\\/]/.test(noWhiteSpace)) return null;
+  if (
+    /drop|select|insert|delete|update|script|javascript:|--|eval|onerror|onload|src=/i.test(
+      noWhiteSpace
+    )
+  )
+    return null;
+
+  return noWhiteSpace;
 }
