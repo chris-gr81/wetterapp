@@ -28,13 +28,4 @@ export async function renderAppCurrent(locationCode, locationName) {
   renderFurther(weatherData);
 }
 
-// Playground
-const favourites = [
-  { city: "Mannheim", id: 601849 },
-  { city: "Helsinki", id: 742591 },
-  { city: "Chicago", id: 2566581 },
-];
-setFavList(favourites);
-
-// End of Playground
 renderMainMenu(getFavList());

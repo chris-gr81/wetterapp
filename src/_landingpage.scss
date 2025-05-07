@@ -17,9 +17,14 @@
       font-size: 3.5rem;
       font-weight: 300;
     }
+
+    & span {
+      cursor: pointer;
+    }
   }
 
   &__search {
+    position: relative;
     width: 100%;
     &-input {
       width: calc(100% - 2rem);
@@ -29,6 +34,16 @@
       font-size: 1rem;
       padding: 0 1rem;
     }
+  }
+
+  &__findings {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 100%;
+    position: absolute;
+    margin-top: 0.3em;
+    background-color: black;
+    z-index: 1000;
   }
 
   &__favourites {
@@ -50,12 +65,31 @@
   }
 }
 
+.finding {
+  border-bottom: 1px solid grey;
+  padding: 1rem;
+  cursor: pointer;
+
+  &__city {
+    font-size: 1.5rem;
+  }
+
+  &__country {
+    font-size: 0.8rem;
+  }
+
+  &:last-child {
+    border: none;
+  }
+}
+
 .fav-delete {
   display: none;
   align-items: center;
   flex: 1;
 
   &__icon {
+    cursor: pointer;
     width: 2rem;
     color: #f13c3c;
     filter: drop-shadow($textShadow);

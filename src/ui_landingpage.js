@@ -55,9 +55,13 @@ function createSearch() {
     "input",
     debounce(async (e, signal) => {
       const searchString = validateInput(e.target.value);
-      if (!searchString) return;
+      if (searchString === null) return;
+      if (searchString === "") {
+        renderFindings([]);
+        return;
+      }
       const suggestions = await fetchSearch(searchString, signal);
-      console.log(suggestions);
+      renderFindings(suggestions);
     }, 500)
   );
 
@@ -149,4 +153,29 @@ function settingsOff(settingsEl) {
   settingsEl.innerText = "Bearbeiten";
   settingsEl.dataset.state = "closed";
   favEls.forEach((fav) => fav.classList.remove("fav-delete--active"));
+}
+
+function renderFindings(entries) {
+  const old = document.querySelector(".main-menu__findings");
+  if (old) old.remove();
+
+  if (!entries.length) return;
+
+  const motherEl = document.querySelector(".main-menu__search");
+  console.log(entries);
+  const findingsEl = createEl("div", "main-menu__findings");
+
+  entries.forEach((entry) => {
+    const findingEl = createEl("div", "finding", "", { "data-id": entry.id });
+    findingEl.append(createEl("div", "finding__city", `${entry.name}`));
+    findingEl.append(
+      createEl("div", "finding__country", `${entry.region}  (${entry.country})`)
+    );
+    findingEl.addEventListener("click", () => {
+      console.log(entry.name);
+      renderAppCurrent(entry.id, entry.name, 3);
+    });
+    findingsEl.append(findingEl);
+  });
+  motherEl.append(findingsEl);
 }

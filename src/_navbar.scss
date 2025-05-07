@@ -8,6 +8,7 @@
 
   &__back-btn,
   &__fav-btn {
+    cursor: pointer;
     height: 2.5rem;
     filter: drop-shadow($textShadow);
   }

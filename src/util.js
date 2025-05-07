@@ -49,7 +49,7 @@ export function setBackground(condition, isDay, currentNode) {
 export async function buildFavMatrix(favourites) {
   const matrix = await Promise.all(
     favourites.map(async (e) => {
-      const cities = await fetchApi("forecast.json", e.id, 0);
+      const cities = await fetchApi("forecast.json", e.id, 1);
       const { location, current, forecast } = cities;
       const { maxtemp_c, mintemp_c } = forecast.forecastday[0].day;
       return {
@@ -100,8 +100,6 @@ export function debounce(fn, delay) {
 
 export function validateInput(input) {
   const noWhiteSpace = input.trim();
-
-  if (!noWhiteSpace) return null;
 
   if (/[<>"';(){}[\]=`\\\/]/.test(noWhiteSpace)) return null;
   if (
