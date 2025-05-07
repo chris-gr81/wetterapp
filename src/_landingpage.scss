@@ -82,6 +82,10 @@
   &:last-child {
     border: none;
   }
+
+  &:hover {
+    background-color: $elevationSecondary;
+  }
 }
 
 .fav-delete {
