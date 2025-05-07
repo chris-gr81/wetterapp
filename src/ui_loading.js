@@ -1,4 +1,6 @@
 import { appEl } from "./main";
+import { getFindingBase } from "./ui_landingpage";
+import { createEl } from "./util";
 
 export function renderLoadingScreen(location = false) {
   appEl.innerHTML = "";
@@ -18,4 +20,11 @@ export function renderLoadingScreen(location = false) {
           
       </div>
       `;
+}
+
+export function renderLoadingSearch() {
+  const { motherEl, findingsEl } = getFindingBase();
+  const loadingEl = createEl("div", "finding__loading", "Lade Vorschläge...");
+  findingsEl.append(loadingEl);
+  motherEl.append(findingsEl);
 }

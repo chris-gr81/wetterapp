@@ -45,6 +45,10 @@
     z-index: 1000;
     // iOS Hack
     transform: translateZ(100px);
+
+    &--hidden {
+      display: none;
+    }
   }
 
   &__favourites {
@@ -77,6 +81,11 @@
 
   &__country {
     font-size: 0.8rem;
+  }
+
+  &__loading {
+    padding: 1rem;
+    font-size: 1.2rem;
   }
 
   &:last-child {

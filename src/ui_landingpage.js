@@ -1,6 +1,7 @@
 import { fetchSearch } from "./api";
 import { deleteElement } from "./localStorage";
 import { appEl, renderAppCurrent } from "./main";
+import { renderLoadingSearch } from "./ui_loading";
 import { createEl, debounce, setBackground, validateInput } from "./util";
 
 let searchString = "";
@@ -51,6 +52,15 @@ function createSearch() {
   const searchEl = createEl("div", "main-menu__search");
   searchEl.append(searchInputEl);
 
+  searchEl.addEventListener("focusin", () => {
+    const targetWrapper = document.querySelector(".main-menu__search");
+    const findingsResult = document.querySelector(".main-menu__findings");
+    if (!findingsResult) return;
+    findingsResult.classList.remove("main-menu__findings--hidden");
+  });
+
+  document.addEventListener("click", bodyClickHandler);
+
   searchInputEl.addEventListener(
     "input",
     debounce(async (e, signal) => {
@@ -60,12 +70,28 @@ function createSearch() {
         renderFindings([]);
         return;
       }
+      renderLoadingSearch();
       const suggestions = await fetchSearch(searchString, signal);
       renderFindings(suggestions);
     }, 300)
   );
 
   return searchEl;
+}
+
+function bodyClickHandler(e) {
+  const targetWrapper = document.querySelector(".main-menu__search");
+  if (!targetWrapper) {
+    document.removeEventListener("click", bodyClickHandler);
+    return;
+  }
+
+  if (!targetWrapper.contains(e.target)) {
+    const findingsResult = document.querySelector(".main-menu__findings");
+    if (!findingsResult) return;
+
+    findingsResult.classList.add("main-menu__findings--hidden");
+  }
 }
 
 function createFavs(matrix) {
@@ -156,14 +182,8 @@ function settingsOff(settingsEl) {
 }
 
 function renderFindings(entries) {
-  const old = document.querySelector(".main-menu__findings");
-  if (old) old.remove();
-
+  const { motherEl, findingsEl } = getFindingBase();
   if (!entries.length) return;
-
-  const motherEl = document.querySelector(".main-menu__search");
-  console.log(entries);
-  const findingsEl = createEl("div", "main-menu__findings");
 
   entries.forEach((entry) => {
     const findingEl = createEl("div", "finding", "", { "data-id": entry.id });
@@ -178,4 +198,12 @@ function renderFindings(entries) {
     findingsEl.append(findingEl);
   });
   motherEl.append(findingsEl);
+}
+
+export function getFindingBase() {
+  const old = document.querySelector(".main-menu__findings");
+  if (old) old.remove();
+  const motherEl = document.querySelector(".main-menu__search");
+  const findingsEl = createEl("div", "main-menu__findings");
+  return { motherEl, findingsEl };
 }
