@@ -4,8 +4,6 @@ import { appEl, renderAppCurrent } from "./main";
 import { renderLoadingSearch } from "./ui_loading";
 import { createEl, debounce, setBackground, validateInput } from "./util";
 
-let searchString = "";
-
 export function renderLandingPage(matrix, isSettings) {
   const mainMenuEl = createEl("div", "main-menu");
   const header = createHeader(isSettings);
@@ -59,19 +57,20 @@ function createSearch() {
     findingsResult.classList.remove("main-menu__findings--hidden");
   });
 
+  document.removeEventListener("click", bodyClickHandler); // avoid doubles
   document.addEventListener("click", bodyClickHandler);
 
   searchInputEl.addEventListener(
     "input",
     debounce(async (e, signal) => {
-      const searchString = validateInput(e.target.value);
-      if (searchString === null) return;
-      if (searchString === "") {
+      const inputValue = validateInput(e.target.value);
+      if (inputValue === null) return;
+      if (inputValue === "") {
         renderFindings([]);
         return;
       }
       renderLoadingSearch();
-      const suggestions = await fetchSearch(searchString, signal);
+      const suggestions = await fetchSearch(inputValue, signal);
       renderFindings(suggestions);
     }, 300)
   );
@@ -81,15 +80,10 @@ function createSearch() {
 
 function bodyClickHandler(e) {
   const targetWrapper = document.querySelector(".main-menu__search");
-  if (!targetWrapper) {
-    document.removeEventListener("click", bodyClickHandler);
-    return;
-  }
+  const findingsResult = document.querySelector(".main-menu__findings");
+  if (!targetWrapper || !findingsResult) return;
 
   if (!targetWrapper.contains(e.target)) {
-    const findingsResult = document.querySelector(".main-menu__findings");
-    if (!findingsResult) return;
-
     findingsResult.classList.add("main-menu__findings--hidden");
   }
 }
