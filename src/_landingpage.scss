@@ -29,7 +29,7 @@
     &-input {
       width: calc(100% - 2rem);
       height: 2.5rem;
-      border-radius: 5px;
+      border-radius: $border-radius;
       border-style: none;
       font-size: 1rem;
       padding: 0 1rem;
@@ -37,13 +37,14 @@
   }
 
   &__findings {
-    border: 1px solid black;
-    border-radius: 10px;
+    border-radius: $border-radius;
     width: 100%;
     position: absolute;
     margin-top: 0.3em;
-    background-color: black;
+    background-color: $elevationPrimary;
     z-index: 1000;
+    // iOS Hack
+    transform: translateZ(100px);
   }
 
   &__favourites {
