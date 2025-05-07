@@ -62,7 +62,7 @@ function createSearch() {
       }
       const suggestions = await fetchSearch(searchString, signal);
       renderFindings(suggestions);
-    }, 500)
+    }, 300)
   );
 
   return searchEl;
