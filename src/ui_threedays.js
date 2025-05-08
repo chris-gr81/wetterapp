@@ -13,7 +13,7 @@ export function renderThreeDays(weatherData) {
 function getThreeDaysHTML(weatherData) {
   return `
         <div class="three-days__header">Vorhersage für die nächsten 3 Tage:</div>
-    <ul class="three-days__list">${createThreeDayList(weatherData)}</ul>
+        <ul class="three-days__list">${createThreeDayList(weatherData)}</ul>
     `;
 }
 

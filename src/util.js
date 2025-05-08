@@ -1,6 +1,12 @@
 import { fetchApi } from "./api";
 import { getConditionImagePath } from "./conditions";
 
+/**Formatiert einen Wert
+ * @param {number} value - Der zu formatierende Wert
+ * @param {number} decimalPlace - Die gewünschten Nachkommastellen
+ * @param {string} unit - Die physiskalische Einheit (z.B. "°C")
+ * @returns {string} Formatierter String (z.B. "2,5 °C")
+ */
 export function styleUnitString(value, decimalPlace, unit) {
   const factor = Math.pow(10, decimalPlace);
   value = Math.floor(value * factor) / factor;
@@ -71,6 +77,14 @@ export async function buildFavMatrix(favourites) {
   return matrix;
 }
 
+/** Erstellt ein DOM-Objekt
+ * @param {string} tag - HTML-Tag
+ * @param {string} className - Klassenname für HTML-Element
+ * @param {string} content - Der Content des Tags, eingebunden als innerHTML
+ * @param {object} attributes - Key-Value-Pair für Attribute des Elements
+ * @returns Das HTML-Objekt
+ *
+ */
 export function createEl(tag, className = "", content = "", attributes = {}) {
   const element = document.createElement(tag);
   if (className) element.className = className;

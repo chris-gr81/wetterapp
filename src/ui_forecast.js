@@ -24,7 +24,8 @@ function createForecastBar(weatherData) {
 
   let forecastBar = "";
   for (const element of matrix) {
-    forecastBar += `<div class="hour-card">
+    forecastBar += `
+        <div class="hour-card">
         <div class="hour-card__hour">${element.hour}
         </div>
         <img class="hour-card__symbol" src="https:${element.img}" alt="symbol" />
