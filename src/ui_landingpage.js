@@ -186,7 +186,6 @@ function renderFindings(entries) {
       createEl("div", "finding__country", `${entry.region}  (${entry.country})`)
     );
     findingEl.addEventListener("click", () => {
-      console.log(entry.name);
       renderAppCurrent(entry.id, entry.name, 3);
     });
     findingsEl.append(findingEl);

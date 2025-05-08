@@ -14,7 +14,7 @@ export function renderForecast(weatherData) {
 function getForecastHTML(conditionDay, maxWind, weatherData) {
   const cardRow = createForecastBar(weatherData);
   return `
-  <div class="forecast__upper">Heute ${conditionDay}. Wind bis zu ${maxWind} km/h.</div>
+        <div class="forecast__upper">Heute ${conditionDay}. Wind bis zu ${maxWind} km/h.</div>
         <div class="forecast__lower">${cardRow}</div>`;
 }
 
